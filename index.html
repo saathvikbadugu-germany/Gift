@@ -188,6 +188,7 @@ accessDenied();
 function showQR(){
 document.getElementById("screen").innerHTML=`
 <h2>MULTI-FACTOR AUTHENTICATION</h2>
+<p>Hint:QR Code</p>
 <p>Enter the token:</p>
 
 <input id="token">
@@ -200,7 +201,7 @@ document.getElementById("screen").innerHTML=`
 function checkToken(){
 let token=document.getElementById("token").value.trim().toUpperCase();
 
-if(token==="TOKEN-7429" || token==="7429"){
+if(token==="TOKEN-7429" || token==="7429" || token==="token-7429"){
 celebration();
 showNetworkPuzzle();
 }else{
@@ -233,6 +234,13 @@ function checkNetwork(){
 let answer=document.getElementById("networkAnswer").value.trim().toUpperCase();
 
 if(answer==="B"){
+celebration();
+setTimeout(() => {
+    celebration()
+}, 1000);
+setTimeout(() => {
+   celebration();
+}, 1000);
 celebration();
 unlockBirthdayFile();
 }else{
