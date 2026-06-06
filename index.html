@@ -63,6 +63,27 @@ Complete all security checks to gain access.
 
 <script>
 
+function accessDenied(){
+
+document.getElementById("screen").innerHTML = `
+
+<h1 style="color:red;">⚠ ACCESS DENIED ⚠</h1>
+
+<p>Unauthorized Access Attempt Detected</p>
+
+<p>Logging Incident...</p>
+
+<p>System Lock Engaged</p>
+
+<br><br>
+
+<button onclick="location.reload()">
+RESTART
+</button>
+
+`;
+}
+
 function startMission(){
 
 document.getElementById("screen").innerHTML = `
