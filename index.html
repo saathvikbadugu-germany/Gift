@@ -19,7 +19,6 @@ body{
     border:2px solid #00ff00;
     padding:30px;
     max-width:700px;
-    white-space:pre-line;
     text-align:center;
 }
 
@@ -36,320 +35,176 @@ button:hover{
     background:#00ff00;
     color:black;
 }
+
+input{
+    padding:10px;
+    font-size:16px;
+    width:80%;
+    margin-top:10px;
+}
 </style>
 </head>
 
 <body>
 
 <div class="box" id="screen">
+<h2>OPERATION BIRTHDAY ACCESS</h2>
+<p>Security Level: MAXIMUM</p>
+<p>User: UNKNOWN</p>
+<p>Complete all security checks.</p>
 
-═══════════════════════════════
-
-OPERATION BIRTHDAY ACCESS
-
-SECURITY LEVEL: MAXIMUM
-
-USER: UNKNOWN
-
-A classified birthday file has been locked.
-
-Complete all security checks to gain access.
-
-<br><br>
-
+<br>
 <button onclick="startMission()">START</button>
-
 </div>
 
 <script>
 
 function celebration(){
+for(let i=0;i<80;i++){
+let c=document.createElement("div");
+c.innerHTML=["🎉","✨","⭐","🔥"][Math.floor(Math.random()*4)];
+c.style.position="fixed";
+c.style.left=Math.random()*100+"vw";
+c.style.top="-20px";
+c.style.fontSize="24px";
+c.style.zIndex="9999";
+c.style.pointerEvents="none";
+document.body.appendChild(c);
 
-for(let i = 0; i < 80; i++){
-
-let confetti = document.createElement("div");
-
-confetti.innerHTML = ["🎉","✨","⭐","🔥"][Math.floor(Math.random()*4)];
-
-confetti.style.position = "fixed";
-confetti.style.left = Math.random() * 100 + "vw";
-confetti.style.top = "-20px";
-confetti.style.fontSize = (20 + Math.random() * 20) + "px";
-confetti.style.zIndex = "9999";
-confetti.style.pointerEvents = "none";
-
-document.body.appendChild(confetti);
-
-let pos = -20;
-
-let fall = setInterval(() => {
-pos += 4 + Math.random() * 3;
-
-confetti.style.top = pos + "px";
-
-if(pos > window.innerHeight){
+let pos=-20;
+let fall=setInterval(()=>{
+pos+=5;
+c.style.top=pos+"px";
+if(pos>window.innerHeight){
 clearInterval(fall);
-confetti.remove();
+c.remove();
 }
-
-}, 20);
-
+},20);
 }
-
 }
 
 function accessDenied(){
-
-document.getElementById("screen").innerHTML = `
-
-<h1 style="color:red;">⚠ ACCESS DENIED ⚠</h1>
-
-<p>Unauthorized Access Attempt Detected</p>
-
-<p>Logging Incident...</p>
-
-<p>System Lock Engaged</p>
-
-<br><br>
-
-<button onclick="location.reload()">
-RESTART
-</button>
-
+document.getElementById("screen").innerHTML=`
+<h1 style="color:red;">ACCESS DENIED</h1>
+<p>Unauthorized attempt detected</p>
+<button onclick="location.reload()">RETRY</button>
 `;
 }
 
 function startMission(){
-
-document.getElementById("screen").innerHTML = `
-
-<h2>SECURE LOGIN</h2>
-
-<p>Authentication Required</p>
-
-<p>Hint: Your favorite child's birthday</p>
-
+document.getElementById("screen").innerHTML=`
+<h2>LOGIN</h2>
+<p>Enter birthday</p>
 <input id="password">
-
 <br><br>
-
 <button onclick="checkPassword()">LOGIN</button>
-
 `;
-
 }
 
 function checkPassword(){
+let pw=document.getElementById("password").value.trim();
 
-let pw = document.getElementById("password").value;
-
-if(pw === "19.12.2012"){
-    celebration();
-    showBase64();
-
+if(pw==="19.12.2012"){
+celebration();
+showBase64();
 }else{
-
-    accessDenied();
-
+accessDenied();
 }
-
 }
 
 function showBase64(){
-
-document.getElementById("screen").innerHTML = `
-
-<h2>ENCRYPTED TRANSMISSION</h2>
-
+document.getElementById("screen").innerHTML=`
+<h2>ENCRYPTED CODE</h2>
 <p>QmlydGhkYXkgQWNjZXNzIENvZGU=</p>
-
-<p><b>Hint:</b> Base64 Encoding</p>
-
-<p>What is the SECOND word after decoding?</p>
-
+<p>Decode it. What is second word?</p>
 <input id="answer">
-
 <br><br>
-
 <button onclick="checkBase64()">SUBMIT</button>
-
 `;
-
 }
 
 function checkBase64(){
+let a=document.getElementById("answer").value.trim().toLowerCase();
 
-let answer =
-
-document.getElementById("answer").value
-
-.trim()
-
-.toLowerCase();
-
-if(answer === "access"){
-    celebration();
-    showQR();
-
+if(a==="access"){
+celebration();
+showQR();
 }else{
-
-    accessDenied();
-
+accessDenied();
 }
-
 }
 
 function showQR(){
-
-document.getElementById("screen").innerHTML = `
-
-<h2>MULTI-FACTOR AUTHENTICATION</h2>
-
-<p>Scan the authorized QR code.</p>
-
-<p>Enter the token:</p>
-
+document.getElementById("screen").innerHTML=`
+<h2>AUTH TOKEN</h2>
+<p>Enter token</p>
 <input id="token">
-
 <br><br>
-
 <button onclick="checkToken()">VERIFY</button>
-
 `;
-
 }
 
 function checkToken(){
+let t=document.getElementById("token").value.trim().toUpperCase();
 
-let token =
-
-document.getElementById("token").value
-
-.trim()
-
-.toUpperCase();
-
-if(token === "TOKEN-7429" OR token === "7429"){
-    celebration();
-    showNetworkPuzzle();
-
+if(t==="TOKEN-7429"){
+celebration();
+showNetwork();
 }else{
-
-    accessDenied();
-
+accessDenied();
+}
 }
 
-}
-
-function showNetworkPuzzle(){
-
-document.getElementById("screen").innerHTML = `
-
-<h2>NETWORK OPERATIONS</h2>
-
-<p>A server has:</p>
-
-<p><b>IP:</b> 192.168.10.55</p>
-
-<p><b>Subnet Mask:</b> 255.255.255.0</p>
-
-<p>Which address is on the SAME subnet?</p>
-
+function showNetwork(){
+document.getElementById("screen").innerHTML=`
+<h2>NETWORK TEST</h2>
+<p>Which IP is same subnet?</p>
 <p>A) 192.168.11.23</p>
-
 <p>B) 192.168.10.201</p>
-
 <p>C) 10.0.0.55</p>
-
 <p>D) 172.16.10.55</p>
 
-<input id="networkAnswer">
-
+<input id="net">
 <br><br>
-
 <button onclick="checkNetwork()">SUBMIT</button>
-
 `;
-
 }
 
 function checkNetwork(){
+let n=document.getElementById("net").value.trim().toUpperCase();
 
-let answer =
-
-document.getElementById("networkAnswer").value
-
-.trim()
-
-.toUpperCase();
-
-if(answer === "B"){
-    celebration();
-    unlockBirthdayFile();
-
+if(n==="B"){
+celebration();
+unlock();
 }else{
-
-    accessDenied();
-
+accessDenied();
+}
 }
 
-}
-
-function unlockBirthdayFile(){
-
-document.getElementById("screen").innerHTML = `
-
-<h2>Decrypting Birthday File...</h2>
-
-<p id="loading">0%</p>
-
+function unlock(){
+document.getElementById("screen").innerHTML=`
+<h2>DECRYPTING...</h2>
+<p id="load">0%</p>
 `;
 
-let progress = 0;
+let p=0;
 
-let timer = setInterval(function(){
+let t=setInterval(()=>{
+p++;
+document.getElementById("load").innerText=p+"%";
 
-progress++;
-
-document.getElementById("loading").innerHTML =
-
-progress + "%";
-
-if(progress >= 100){
-
-clearInterval(timer);
-
-document.getElementById("screen").innerHTML = `
-
+if(p>=100){
+clearInterval(t);
+document.getElementById("screen").innerHTML=`
 <h1>ACCESS GRANTED</h1>
-
-<p>███████████████████ 100%</p>
-
-<h2>Birthday File Unlocked</h2>
-
-<br>
-
-<h1>🎉 HAPPY BIRTHDAY DAD 🎉</h1>
-
-<p>Mission Completed Successfully</p>
-
-<p>Security Clearance: LEGENDARY</p>
-
-<p>Family Status: APPROVED</p>
-
-<p>Gift Location:on your table</p>
-
-
+<h2>🎉 HAPPY BIRTHDAY 🎉</h2>
+<p>Gift is on your table</p>
 `;
-
 }
-
 },40);
-
 }
 
 </script>
-
 
 </body>
 </html>
