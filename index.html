@@ -63,6 +63,41 @@ Complete all security checks to gain access.
 
 <script>
 
+function celebration(){
+
+for(let i = 0; i < 80; i++){
+
+let confetti = document.createElement("div");
+
+confetti.innerHTML = ["🎉","✨","⭐","🔥"][Math.floor(Math.random()*4)];
+
+confetti.style.position = "fixed";
+confetti.style.left = Math.random() * 100 + "vw";
+confetti.style.top = "-20px";
+confetti.style.fontSize = (20 + Math.random() * 20) + "px";
+confetti.style.zIndex = "9999";
+confetti.style.pointerEvents = "none";
+
+document.body.appendChild(confetti);
+
+let pos = -20;
+
+let fall = setInterval(() => {
+pos += 4 + Math.random() * 3;
+
+confetti.style.top = pos + "px";
+
+if(pos > window.innerHeight){
+clearInterval(fall);
+confetti.remove();
+}
+
+}, 20);
+
+}
+
+}
+
 function accessDenied(){
 
 document.getElementById("screen").innerHTML = `
@@ -109,7 +144,7 @@ function checkPassword(){
 let pw = document.getElementById("password").value;
 
 if(pw === "19.12.2012"){
-
+    celebration();
     showBase64();
 
 }else{
@@ -153,7 +188,7 @@ document.getElementById("answer").value
 .toLowerCase();
 
 if(answer === "access"){
-
+    celebration();
     showQR();
 
 }else{
@@ -194,8 +229,8 @@ document.getElementById("token").value
 
 .toUpperCase();
 
-if(token === "TOKEN-7429"){
-
+if(token === "TOKEN-7429" OR token === "7429"){
+    celebration();
     showNetworkPuzzle();
 
 }else{
@@ -249,7 +284,7 @@ document.getElementById("networkAnswer").value
 .toUpperCase();
 
 if(answer === "B"){
-
+    celebration();
     unlockBirthdayFile();
 
 }else{
