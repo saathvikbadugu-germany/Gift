@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Operation Birthday Access</title>
+
+<style>
+body{
+    background:black;
+    color:#00ff00;
+    font-family:Consolas,monospace;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+}
+
+.box{
+    border:2px solid #00ff00;
+    padding:30px;
+    max-width:700px;
+    white-space:pre-line;
+    text-align:center;
+}
+
+button{
+    background:black;
+    color:#00ff00;
+    border:2px solid #00ff00;
+    padding:12px 25px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#00ff00;
+    color:black;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="screen">
+
+═══════════════════════════════
+
+OPERATION BIRTHDAY ACCESS
+
+SECURITY LEVEL: MAXIMUM
+
+USER: UNKNOWN
+
+A classified birthday file has been locked.
+
+Complete all security checks to gain access.
+
+<br><br>
+
+<button onclick="startMission()">START</button>
+
+</div>
+
+<script>
+
+function celebration(){
+
+for(let i=0;i<40;i++){
+
+let confetti=document.createElement("div");
+
+confetti.innerHTML="🎉";
+
+confetti.style.position="fixed";
+confetti.style.left=Math.random()*100+"vw";
+confetti.style.top="-20px";
+confetti.style.fontSize="30px";
+confetti.style.zIndex="9999";
+
+document.body.appendChild(confetti);
+
+let pos=-20;
+
+let fall=setInterval(function(){
+
+pos+=5;
+
+confetti.style.top=pos+"px";
+
+if(pos>window.innerHeight){
+
+clearInterval(fall);
+
+confetti.remove();
+
+}
+
+},20);
+
+}
+
+}
+
+function accessDenied(){
+
+document.getElementById("screen").innerHTML = `
+
+<h1 style="color:red;">⚠ ACCESS DENIED ⚠</h1>
+
+<p>Unauthorized Access Attempt Detected</p>
+
+<p>Logging Incident...</p>
+
+<p>Reporting To Security Operations Center...</p>
+
+<p>IP Traced Successfully</p>
+
+<br>
+
+<button onclick="location.reload()">
+RESTART AUTHENTICATION
+</button>
+
+`;
+
+}
+
+
+function startMission(){
+
+document.getElementById("screen").innerHTML = `
+
+<h2>SECURE LOGIN</h2>
+
+<p>Authentication Required</p>
+
+<p>Hint: Your favorite child's birthday</p>
+
+<input id="password">
+
+<br><br>
+
+<button onclick="checkPassword()">LOGIN</button>
+
+`;
+
+}
+
+function checkPassword(){
+
+let pw = document.getElementById("password").value;
+
+if(pw === "19.12.2012"){
+
+    showBase64();
+
+}else{
+
+    accessDenied();
+
+}
+
+}
+
+function showBase64(){
+
+document.getElementById("screen").innerHTML = `
+
+<h2>ENCRYPTED TRANSMISSION</h2>
+
+<p>QmlydGhkYXkgQWNjZXNzIENvZGU=</p>
+
+<p><b>Hint:</b> Base64 Encoding</p>
+
+<p>What is the SECOND word after decoding?</p>
+
+<input id="answer">
+
+<br><br>
+
+<button onclick="checkBase64()">SUBMIT</button>
+
+`;
+
+}
+
+function checkBase64(){
+
+let answer =
+
+document.getElementById("answer").value
+
+.trim()
+
+.toLowerCase();
+
+if(answer === "access"){
+
+    showQR();
+
+}else{
+
+    accessDenied();
+
+}
+
+}
+
+function showQR(){
+
+document.getElementById("screen").innerHTML = `
+
+<h2>MULTI-FACTOR AUTHENTICATION</h2>
+
+<p>Scan the authorized QR code.</p>
+
+<p>Enter the token:</p>
+
+<input id="token">
+
+<br><br>
+
+<button onclick="checkToken()">VERIFY</button>
+
+`;
+
+}
+
+function checkToken(){
+
+let token =
+
+document.getElementById("token").value
+
+.trim()
+
+.toUpperCase();
+
+if(token === "TOKEN-7429"){
+
+    showNetworkPuzzle();
+
+}else{
+
+    alert("Invalid Token");
+
+}
+
+}
+
+function showNetworkPuzzle(){
+
+document.getElementById("screen").innerHTML = `
+
+<h2>NETWORK OPERATIONS</h2>
+
+<p>A server has:</p>
+
+<p><b>IP:</b> 192.168.10.55</p>
+
+<p><b>Subnet Mask:</b> 255.255.255.0</p>
+
+<p>Which address is on the SAME subnet?</p>
+
+<p>A) 192.168.11.23</p>
+
+<p>B) 192.168.10.201</p>
+
+<p>C) 10.0.0.55</p>
+
+<p>D) 172.16.10.55</p>
+
+<input id="networkAnswer">
+
+<br><br>
+
+<button onclick="checkNetwork()">SUBMIT</button>
+
+`;
+
+}
+
+function checkNetwork(){
+
+let answer =
+
+document.getElementById("networkAnswer").value
+
+.trim()
+
+.toUpperCase();
+
+if(answer === "B"){
+
+	celebration();
+    unlockBirthdayFile();
+
+}else{
+
+    accessDenied();
+
+}
+
+}
+
+function unlockBirthdayFile(){
+
+document.getElementById("screen").innerHTML = `
+
+<h2>Decrypting Birthday File...</h2>
+
+<p id="loading">0%</p>
+
+`;
+
+let progress = 0;
+
+let timer = setInterval(function(){
+
+progress++;
+
+document.getElementById("loading").innerHTML =
+
+progress + "%";
+
+if(progress >= 100){
+
+clearInterval(timer);
+
+document.getElementById("screen").innerHTML = `
+
+<h1>ACCESS GRANTED</h1>
+
+<p>███████████████████ 100%</p>
+
+<h2>Birthday File Unlocked</h2>
+
+<br>
+
+<h1>🎉 HAPPY BIRTHDAY DAD 🎉</h1>
+
+<p>Mission Completed Successfully</p>
+
+<p>Security Clearance: LEGENDARY</p>
+
+<p>Family Status: APPROVED</p>
+
+`;
+
+}
+
+},40);
+
+}
+
+</script>
+
+<script>
+
+function startMission(){
+
+document.getElementById("screen").innerHTML = `
+
+<h2>SECURE LOGIN</h2>
+
+<p>Authentication Required</p>
+
+<p>Hint: Your favorite child's birthday</p>
+
+<input id="password">
+
+<br><br>
+
+<button onclick="checkPassword()">LOGIN</button>
+
+`;
+
+}
+
+function checkPassword(){
+
+let pw = document.getElementById("password").value;
+
+if(pw === "19.12.2012"){
+
+    showBase64();
+
+}else{
+
+    alert("ACCESS DENIED");
+
+}
+
+}
+
+function showBase64(){
+
+document.getElementById("screen").innerHTML = `
+
+<h2>ENCRYPTED TRANSMISSION</h2>
+
+<p>QmlydGhkYXkgQWNjZXNzIENvZGU=</p>
+
+<p><b>Hint:</b> Base64 Encoding</p>
+
+<p>What is the SECOND word after decoding?</p>
+
+<input id="answer">
+
+<br><br>
+
+<button onclick="checkBase64()">SUBMIT</button>
+
+`;
+
+}
+
+function checkBase64(){
+
+let answer =
+
+document.getElementById("answer").value
+
+.trim()
+
+.toLowerCase();
+
+if(answer === "access"){
+
+    showQR();
+
+}else{
+
+    alert("Incorrect Answer");
+
+}
+
+}
+
+function showQR(){
+
+document.getElementById("screen").innerHTML = `
+
+<h2>MULTI-FACTOR AUTHENTICATION</h2>
+
+<p>Scan the authorized QR code.</p>
+
+<p>Enter the token:</p>
+
+<input id="token">
+
+<br><br>
+
+<button onclick="checkToken()">VERIFY</button>
+
+`;
+
+}
+
+function checkToken(){
+
+let token =
+
+document.getElementById("token").value
+
+.trim()
+
+.toUpperCase();
+
+if(token === "TOKEN-7429"){
+
+    showNetworkPuzzle();
+
+}else{
+
+    alert("Invalid Token");
+
+}
+
+}
+
+function showNetworkPuzzle(){
+
+document.getElementById("screen").innerHTML = `
+
+<h2>NETWORK OPERATIONS</h2>
+
+<p>A server has:</p>
+
+<p><b>IP:</b> 192.168.10.55</p>
+
+<p><b>Subnet Mask:</b> 255.255.255.0</p>
+
+<p>Which address is on the SAME subnet?</p>
+
+<p>A) 192.168.11.23</p>
+
+<p>B) 192.168.10.201</p>
+
+<p>C) 10.0.0.55</p>
+
+<p>D) 172.16.10.55</p>
+
+<input id="networkAnswer">
+
+<br><br>
+
+<button onclick="checkNetwork()">SUBMIT</button>
+
+`;
+
+}
+
+function checkNetwork(){
+
+let answer =
+
+document.getElementById("networkAnswer").value
+
+.trim()
+
+.toUpperCase();
+
+if(answer === "B"){
+
+    unlockBirthdayFile();
+
+}else{
+
+    alert("Access Rejected");
+
+}
+
+}
+
+function unlockBirthdayFile(){
+
+document.getElementById("screen").innerHTML = `
+
+<h2>Decrypting Birthday File...</h2>
+
+<p id="loading">0%</p>
+
+`;
+
+let progress = 0;
+
+let timer = setInterval(function(){
+
+progress++;
+
+document.getElementById("loading").innerHTML =
+
+progress + "%";
+
+if(progress >= 100){
+
+clearInterval(timer);
+
+document.getElementById("screen").innerHTML = `
+
+<h1>ACCESS GRANTED</h1>
+
+<p>███████████████████ 100%</p>
+
+<h2>Birthday File Unlocked</h2>
+
+<br>
+
+<h1>🎉 HAPPY BIRTHDAY DAD 🎉</h1>
+
+<p>Mission Completed Successfully</p>
+
+<p>Security Clearance: LEGENDARY</p>
+
+<p>Family Status: APPROVED</p>
+
+`;
+
+}
+
+},40);
+
+}
+
+</script>
+
+
+</body>
+</html>
