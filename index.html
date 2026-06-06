@@ -5,21 +5,32 @@
 
 <style>
 body{
-    background:black;
+    background: radial-gradient(circle at center, #050505, #000000);
     color:#00ff00;
-    font-family:Consolas,monospace;
+    font-family:Consolas, monospace;
     display:flex;
     justify-content:center;
     align-items:center;
     height:100vh;
     margin:0;
+    overflow:hidden;
 }
 
+/* glowing terminal box */
 .box{
     border:2px solid #00ff00;
     padding:30px;
-    max-width:700px;
+    max-width:750px;
     text-align:center;
+    background:rgba(0,0,0,0.6);
+    box-shadow:0 0 25px #00ff00;
+    border-radius:10px;
+    animation: flicker 3s infinite;
+}
+
+@keyframes flicker{
+    0%,100%{box-shadow:0 0 15px #00ff00;}
+    50%{box-shadow:0 0 35px #00ff00;}
 }
 
 button{
@@ -29,11 +40,13 @@ button{
     padding:12px 25px;
     font-size:18px;
     cursor:pointer;
+    transition:0.2s;
 }
 
 button:hover{
     background:#00ff00;
     color:black;
+    transform:scale(1.05);
 }
 
 input{
@@ -41,6 +54,25 @@ input{
     font-size:16px;
     width:80%;
     margin-top:10px;
+    border:2px solid #00ff00;
+    background:black;
+    color:#00ff00;
+}
+
+/* subtle background scanlines */
+body::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,255,0,0.03),
+        rgba(0,255,0,0.03) 1px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events:none;
 }
 </style>
 </head>
@@ -48,13 +80,23 @@ input{
 <body>
 
 <div class="box" id="screen">
-<h2>OPERATION BIRTHDAY ACCESS</h2>
-<p>Security Level: MAXIMUM</p>
-<p>User: UNKNOWN</p>
-<p>Complete all security checks.</p>
 
-<br>
+═══════════════════════════════
+
+OPERATION BIRTHDAY ACCESS
+
+SECURITY LEVEL: MAXIMUM
+
+USER: UNKNOWN
+
+A classified birthday file has been locked.
+
+Complete all security checks to gain access.
+
+<br><br>
+
 <button onclick="startMission()">START</button>
+
 </div>
 
 <script>
@@ -85,17 +127,23 @@ c.remove();
 
 function accessDenied(){
 document.getElementById("screen").innerHTML=`
-<h1 style="color:red;">ACCESS DENIED</h1>
-<p>Unauthorized attempt detected</p>
-<button onclick="location.reload()">RETRY</button>
+<h1 style="color:red;">⚠ ACCESS DENIED ⚠</h1>
+<p>Unauthorized Access Attempt Detected</p>
+<p>Logging Incident...</p>
+<p>Reporting To Security Operations Center...</p>
+<br>
+<button onclick="location.reload()">RESTART AUTHENTICATION</button>
 `;
 }
 
 function startMission(){
 document.getElementById("screen").innerHTML=`
-<h2>LOGIN</h2>
-<p>Enter birthday</p>
+<h2>SECURE LOGIN</h2>
+<p>Authentication Required</p>
+<p>Hint: Your favorite child's birthday</p>
+
 <input id="password">
+
 <br><br>
 <button onclick="checkPassword()">LOGIN</button>
 `;
@@ -114,19 +162,22 @@ accessDenied();
 
 function showBase64(){
 document.getElementById("screen").innerHTML=`
-<h2>ENCRYPTED CODE</h2>
+<h2>ENCRYPTED TRANSMISSION</h2>
 <p>QmlydGhkYXkgQWNjZXNzIENvZGU=</p>
-<p>Decode it. What is second word?</p>
+<p><b>Hint:</b> Base64 Encoding</p>
+<p>What is the SECOND word after decoding?</p>
+
 <input id="answer">
+
 <br><br>
 <button onclick="checkBase64()">SUBMIT</button>
 `;
 }
 
 function checkBase64(){
-let a=document.getElementById("answer").value.trim().toLowerCase();
+let answer=document.getElementById("answer").value.trim().toLowerCase();
 
-if(a==="access"){
+if(answer==="access"){
 celebration();
 showQR();
 }else{
@@ -136,69 +187,83 @@ accessDenied();
 
 function showQR(){
 document.getElementById("screen").innerHTML=`
-<h2>AUTH TOKEN</h2>
-<p>Enter token</p>
+<h2>MULTI-FACTOR AUTHENTICATION</h2>
+<p>Enter the token:</p>
+
 <input id="token">
+
 <br><br>
 <button onclick="checkToken()">VERIFY</button>
 `;
 }
 
 function checkToken(){
-let t=document.getElementById("token").value.trim().toUpperCase();
+let token=document.getElementById("token").value.trim().toUpperCase();
 
-if(t==="TOKEN-7429"){
+if(token==="TOKEN-7429"){
 celebration();
-showNetwork();
+showNetworkPuzzle();
 }else{
 accessDenied();
 }
 }
 
-function showNetwork(){
+function showNetworkPuzzle(){
 document.getElementById("screen").innerHTML=`
-<h2>NETWORK TEST</h2>
-<p>Which IP is same subnet?</p>
+<h2>NETWORK OPERATIONS</h2>
+<p>A server has:</p>
+<p><b>IP:</b> 192.168.10.55</p>
+<p><b>Subnet Mask:</b> 255.255.255.0</p>
+
+<p>Which address is on the SAME subnet?</p>
+
 <p>A) 192.168.11.23</p>
 <p>B) 192.168.10.201</p>
 <p>C) 10.0.0.55</p>
 <p>D) 172.16.10.55</p>
 
-<input id="net">
+<input id="networkAnswer">
+
 <br><br>
 <button onclick="checkNetwork()">SUBMIT</button>
 `;
 }
 
 function checkNetwork(){
-let n=document.getElementById("net").value.trim().toUpperCase();
+let answer=document.getElementById("networkAnswer").value.trim().toUpperCase();
 
-if(n==="B"){
+if(answer==="B"){
 celebration();
-unlock();
+unlockBirthdayFile();
 }else{
 accessDenied();
 }
 }
 
-function unlock(){
+function unlockBirthdayFile(){
 document.getElementById("screen").innerHTML=`
-<h2>DECRYPTING...</h2>
-<p id="load">0%</p>
+<h2>Decrypting Birthday File...</h2>
+<p id="loading">0%</p>
 `;
 
-let p=0;
+let progress=0;
 
-let t=setInterval(()=>{
-p++;
-document.getElementById("load").innerText=p+"%";
+let timer=setInterval(()=>{
+progress++;
+document.getElementById("loading").innerText=progress+"%";
 
-if(p>=100){
-clearInterval(t);
+if(progress>=100){
+clearInterval(timer);
+
 document.getElementById("screen").innerHTML=`
 <h1>ACCESS GRANTED</h1>
+<p>███████████████████ 100%</p>
+
 <h2>🎉 HAPPY BIRTHDAY 🎉</h2>
-<p>Gift is on your table</p>
+<p>Mission Completed Successfully</p>
+<p>Security Clearance: LEGENDARY</p>
+<p>Family Status: APPROVED</p>
+<p>Gift Location: on your table</p>
 `;
 }
 },40);
